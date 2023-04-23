@@ -1,6 +1,6 @@
-# yong-ui
+# sangyoon-ui
 
-Typescript Framework to develop SPA UI.
+> JavaScript(TypeScript) UI Framework to develop SPA Web.
 
 ## Installation
 
