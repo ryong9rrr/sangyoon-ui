@@ -1,6 +1,6 @@
 {
   "name": "sangyoon-ui",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "UI Framework to Help Develop SPA.",
   "keywords": [
     "spa",
@@ -30,8 +30,8 @@
     "lib": "lib"
   },
   "engines": {
-    "node": "~16.15.1",
-    "npm": "~9.2.0"
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
   },
   "browser": "./browser/specific/main.js",
   "scripts": {
