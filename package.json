@@ -1,6 +1,6 @@
 {
   "name": "sangyoon-ui",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "UI Framework to Help Develop SPA.",
   "keywords": [
     "spa",
@@ -18,7 +18,8 @@
   "typings": "dist/index.d.ts",
   "files": [
     "dist/sangyoon-ui.js",
-    "dist/index.d.ts"
+    "dist/index.d.ts",
+    "dist/**/*.d.ts"
   ],
   "repository": {
     "type": "git",
@@ -35,7 +36,8 @@
   "browser": "./browser/specific/main.js",
   "scripts": {
     "test": "jest --watch",
-    "build": "webpack"
+    "build": "webpack",
+    "tsc": "tsc"
   },
   "devDependencies": {
     "@types/chai": "^4.3.4",
