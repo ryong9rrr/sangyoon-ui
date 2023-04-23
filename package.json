@@ -1,6 +1,6 @@
 {
   "name": "sangyoon-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "UI Framework to Help Develop SPA.",
   "keywords": [
     "spa",
@@ -14,7 +14,12 @@
   },
   "license": "MIT",
   "author": "yongsangyoon <tkddbs1644@gmail.com> (https://github.com/ryong9rrr)",
-  "main": "lib",
+  "main": "dist/sangyoon-ui.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist/sangyoon-ui.js",
+    "dist/index.d.ts"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/ryong9rrr/sangyoon-ui"
