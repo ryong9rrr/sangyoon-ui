@@ -1,5 +1,5 @@
-import { Component } from "../ui"
-import { Service, Type } from "../interfaces"
+import { Component } from "../../ui"
+import { Service, Type } from "../../interfaces"
 
 import { ROUTE_EVENT_TYPE } from "./event-type"
 import { RouteTable } from "./types"

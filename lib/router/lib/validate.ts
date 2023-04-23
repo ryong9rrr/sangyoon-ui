@@ -1,5 +1,5 @@
-import { Component } from "../ui"
-import * as Errors from "../interfaces/errors"
+import { Component } from "../../ui"
+import * as Errors from "../../interfaces/errors"
 
 const isComponentClass = (arg: any) => {
   return Object.getPrototypeOf(arg) === Component

@@ -1,5 +1,5 @@
-import { Component } from "../ui"
-import { Service, Type } from "../interfaces"
+import { Component } from "../../ui"
+import { Service, Type } from "../../interfaces"
 
 export type RouterStaticMethodOptions = {
   _webApiService: Service.WebApiService

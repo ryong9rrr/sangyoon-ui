@@ -1,7 +1,7 @@
 node_modules
-
 **/__tests__/
-
 *.test.ts
-
 jest.config.js
+examples
+tsconfig.json
+webpack.*.js
