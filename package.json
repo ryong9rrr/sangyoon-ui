@@ -10,14 +10,14 @@
     "framework"
   ],
   "bugs": {
-    "url": ""
+    "url": "https://github.com/ryong9rrr/yong-ui"
   },
   "license": "ISC",
   "author": "yongsangyoon <tkddbs1644@gmail.com> (https://github.com/ryong9rrr)",
   "main": "dist/index.js",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/ryong9rrr/yong-ui"
   },
   "directories": {
     "example": "examples",
@@ -28,7 +28,7 @@
     "npm": "~9.2.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watch"
   },
   "peerDependencies": {
     "typescript": "^5.0.3",
