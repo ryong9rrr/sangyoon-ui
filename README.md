@@ -2,7 +2,7 @@
 
 Sangyoon-UI is a Vanilla JavaScript(TypeScript) UI framework package that can be used to develop SPAs.
 
-It provides the `Ui`, `Router`, and global state store `Flux` that can be easily integrated into your SPA project.
+It provides the `ui`, `router`, and global state store `flux` that can be easily integrated into your SPA project.
 
 ## Installation
 
@@ -23,5 +23,5 @@ yarn add sangyoon-ui
 ### Ui
 
 ```ts
-import { Ui } from "sangyoon-ui"
+import { ui } from "sangyoon-ui"
 ```
