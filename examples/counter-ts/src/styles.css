@@ -1,0 +1,23 @@
+#root {
+  margin: 150px auto 0;
+  width: 480px;
+  padding: 100px;
+
+  display: flex;
+  justify-content: center;
+}
+
+h1 {
+  text-align: center;
+  font-size: 50px;
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+}
+
+button {
+  padding: 20px;
+  font-size: 30px;
+}
