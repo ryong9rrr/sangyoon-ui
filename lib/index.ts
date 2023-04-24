@@ -1,3 +1,3 @@
-export * as flux from "./flux"
-export * as router from "./router"
-export * as ui from "./ui"
+export * as Flux from "./flux"
+export * as Router from "./router"
+export * as Ui from "./ui"
