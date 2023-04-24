@@ -2,7 +2,7 @@
 
 You can use `sangyoon-ui` to implement the following projects.
 
-## 1. Counter
+## Step 1. Counter
 
 using `ui`
 
@@ -10,7 +10,7 @@ using `ui`
 
 ---
 
-## 2. TodoList
+## Step 2. TodoList
 
 using `ui`
 
@@ -18,8 +18,14 @@ using `ui`
 
 ---
 
-## 3. Movie-SPA
+## Step 3. Movie-SPA
 
 using `ui`, `router`
 
 <img src="./images/movie.gif" />
+
+---
+
+## Step 4. Cart-SPA
+
+using `ui`, `router`, `flux`
