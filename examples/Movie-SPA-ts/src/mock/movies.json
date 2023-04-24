@@ -1,0 +1,34 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "title": "The Shawshank Redemption",
+      "year": "1994",
+      "director": "Frank Darabont",
+      "genre": "Drama",
+      "runtime": "142 min",
+      "plot": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMDFkYTJlN2MtM2QzNC00MDhjLWJmMjAtNjEzYjI1Mjk1YmIyXkEyXkFqcGdeQXVyMTAwMzM3NDI2._V1_SX300.jpg"
+    },
+    {
+      "id": "2",
+      "title": "The Godfather",
+      "year": "1972",
+      "director": "Francis Ford Coppola",
+      "genre": "Crime, Drama",
+      "runtime": "175 min",
+      "plot": "An organized crime dynasty's aging patriarch transfers control of his clandestine empire to his reluctant son.",
+      "poster": "https://m.media-amazon.com/images/M/MV5BM2MyNjZlMTEtMTEzZC00NzY0LThkNjgtNWFlOTNlNGJlODMyXkEyXkFqcGdeQXVyMTAwMzM3NDI2._V1_SX300.jpg"
+    },
+    {
+      "id": "3",
+      "title": "The Dark Knight",
+      "year": "2008",
+      "director": "Christopher Nolan",
+      "genre": "Action, Crime, Drama",
+      "runtime": "152 min",
+      "plot": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMjMxNjAwNjE0M15BMl5BanBnXkFtZTcwNjQyNjEzNw@@._V1_SX300.jpg"
+    }
+  ]
+}
