@@ -29,3 +29,5 @@ using `ui`, `router`
 ## Step 4. Cart-SPA
 
 using `ui`, `router`, `flux`
+
+<img src="./images/cart-spa.gif" />

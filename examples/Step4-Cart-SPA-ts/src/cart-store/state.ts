@@ -1,9 +1,9 @@
-import Movie from "../models/Movie"
+import Item from "../models/Item"
 
 export type CartState = {
-  items: Movie[]
+  likeItems: Item[]
 }
 
 export const initialState: CartState = {
-  items: [],
+  likeItems: [],
 }

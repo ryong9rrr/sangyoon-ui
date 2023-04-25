@@ -1,0 +1,39 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "name": "jeans",
+      "price": 15.0,
+      "image": "https://images.unsplash.com/photo-1542272604-787c3835535d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1626&q=80",
+      "description": "This is jeans"
+    },
+    {
+      "id": "2",
+      "name": "shoes",
+      "price": 10.0,
+      "image": "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1712&q=80",
+      "description": "This is shoes"
+    },
+    {
+      "id": "3",
+      "name": "coffee",
+      "price": 1.0,
+      "image": "https://images.unsplash.com/photo-1485808191679-5f86510681a2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
+      "description": "This is coffee"
+    },
+    {
+      "id": "4",
+      "name": "keyboard",
+      "price": 20.0,
+      "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2065&q=80",
+      "description": "This is keyboard"
+    },
+    {
+      "id": "5",
+      "name": "guitar",
+      "price": 50.0,
+      "image": "https://images.unsplash.com/photo-1558098329-a11cff621064?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=990&q=80",
+      "description": "This is guitar"
+    }
+  ]
+}
