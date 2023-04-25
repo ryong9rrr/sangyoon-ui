@@ -1,27 +1,138 @@
 # sangyoon-ui
 
-Sangyoon-UI is a Vanilla JavaScript(TypeScript) UI framework package that can be used to develop SPAs.
-
-It provides the `ui`, `router`, and global state store `flux` that can be easily integrated into your SPA project.
+`sangyoon-ui`는 Single Page Application 구현을 도와주는 자바스크립트(타입스크립트) UI 프레임워크입니다.
 
 ## Installation
 
-You can install using npm:
-
 ```
 npm install sangyoon-ui
-```
 
-Or you can use yarn:
-
-```
 yarn add sangyoon-ui
 ```
 
-## Usage
+> Note : 타입스크립트로 작성되었기 때문에 따로 설치해야할 @types 모듈은 필요없습니다.
 
-### Ui
+## API Summary
+
+`sangyoon-ui`는 크게 3가지 모듈을 지원합니다.
+
+### ui
+
+컴포넌트 구현을 도와주는 추상클래스인 `Component`를 제공합니다.
+
+`Component` 클래스는...
+
+- **상태**에 따라 ui를 렌더링 시킵니다.
+
+- **컴포넌트 단위**로 ui를 구성할 수 있습니다.
+
+- 라이프사이클 메서드를 지원하며 **리액트의 라이프사이클**에서 영감을 얻었습니다.
 
 ```ts
 import { ui } from "sangyoon-ui"
+
+// Props, State는 제네릭으로 기본값은 {} 이고 필요없다면 생략해도 됩니다.
+class App extends ui.Component<Props, State> {
+  // 여기서 App의 상태를 정의할 수 있고, 타입은 State와 동일해야합니다.
+  initState(): State {
+    return {}
+  }
+
+  // Component는 template()을 반드시 구현해야합니다.
+  template(): string {
+    return `<h1>Hello World!</h1>`
+  }
+
+  // 여기서 이벤트를 'addEvent()' 메서드를 통해 정의해야합니다.
+  setEvent(){
+    this.addEvent(...)
+  }
+
+  /*
+  이 메서드는 현재 컴포넌트와 하위 컴포넌트를 "구독-발행" 관계로 정의합니다.
+  이 메서드 내부에서 "addComponent()" 메서드를 통해 하위 컴포넌트를 등록합니다.
+  */
+  setChildren(){
+    this.addComponent(...)
+  }
+
+  /*
+  라이프사이클 메서드로, 컴포넌트가 "렌더링"되기 전에 단 한 번 실행됩니다.
+  하지만 이 라이프사이클의 사용은 가급적 피하는 것이 좋습니다.
+  */
+  componentWillMount(){
+    /*
+    하지만 만약 "flux" 모듈로 전역상태스토어를 사용하고 있다면,
+    여기서 setProvider() 메서드를 통해 스토어를 "구독"하세요.
+    */
+   this.setProvider(스토어)
+  }
+
+  /*
+  라이프사이클 메서드로, 컴포넌트가 "렌더링" 된 이후에 단 한 번 실행됩니다.
+  */
+  componentDidMount(){}
+
+  /*
+  라이프사이클 메서드로, 컴포넌트가 "리렌더링" 된 이후마다 실행됩니다.
+  */
+  componentDidUpdate(){}
+}
 ```
+
+### router
+
+SPA를 위한 라우팅을 도와줍니다. url 경로에 대한 Page 설정과 navigate를 지원합니다.
+
+이 모듈은 `react-router-dom`에서 영감을 받았기 때문에 다음과 같이 사용할 수 있습니다.
+
+```ts
+import { ui, router as Router } from "sangyoon-ui"
+
+class Page extends ui.Component{ ... }
+class Page2 extends ui.Component{ ... }
+class NotFoundPage extends ui.Component{ ... }
+
+// 페이지 렌더링이 이루어질 최상위 DOM Selector를 주입합니다.
+const router = Router.createRouter(`#root`)
+
+// addRoute() 를 통해 url과 page 컴포넌트를 등록합니다.
+router.addRoute("/", Page) // "/" 경로에 매칭됩니다.
+router.addRoute(`/:documentId`, Page2) // "/1", "/hi" ... 등의 경로에 매칭됩니다.
+
+/*
+만약 어떤 경로에도 매칭되지 않았을 때 보여주고 싶은 페이지가 있다면,
+setNotFoundView() 메서드를 사용하세요.
+*/
+router.setNotFoundView(NotFoundPage)
+
+// 경로 설정을 모두 마친 뒤에는 route() 를 호출해야합니다.
+router.route()
+```
+
+### flux
+
+전역 상태 관리를 도와줍니다.
+
+redux를 모티브로 구현하였기 때문에 사용법은 초창기 redux와 거의 유사합니다.
+
+- `actionCreator()`를 사용해서 "액션"을 생성하세요.
+
+- `createStore()` 에 `reducer`를 주입하여 스토어를 생성하세요.
+
+- 컴포넌트와 flux store를 "구독-발행" 관계로 설정하기 위해서는 `Component`를 정의할 때 `componentWillMount()` 라이프사이클 메서드 안에서 `setProvider()` 메서드를 통해 스토어를 구독해야합니다.
+
+  ```ts
+  ...
+  componentWillMount(){
+    /*
+    하지만 만약 "flux" 모듈로 전역상태스토어를 사용하고 있다면,
+    여기서 setProvider() 메서드를 통해 스토어를 "구독"하세요.
+    */
+    this.setProvider(스토어)
+  }
+  ```
+
+## Examples
+
+깃허브 저장소의 `examples` 폴더에서 예제 코드를 확인해보세요. 4가지 예제가 준비 되어 있습니다.
