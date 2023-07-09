@@ -1,1 +1,5 @@
-export { default as Component } from "./Component"
+import { Component } from "./Component"
+
+export const Ui = {
+  Component,
+}

@@ -1,10 +1,7 @@
-import Component from "./Component"
-import { isDiff, spreadObject } from "./helpers"
+import { Component } from "./Component"
+import { isDiff, spreadObject } from "./utils"
 
-export const modifyPropsOfChildren = <T>(
-  obj: T,
-  component: Component<unknown, unknown>,
-) => {
+export const modifyPropsOfChildren = <T>(obj: T, component: Component<unknown, unknown>) => {
   const children = component._children
 
   children.forEach((subComponent) => {
@@ -27,9 +24,7 @@ export const rerenderChildren = (component: Component<unknown, unknown>) => {
   })
 }
 
-export const callComponentDidUpdateOfChildren = (
-  component: Component<unknown, unknown>,
-) => {
+export const callComponentDidUpdateOfChildren = (component: Component<unknown, unknown>) => {
   const children = component._children
 
   children.forEach((subComponent) => {

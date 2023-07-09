@@ -1,32 +1,32 @@
-import Component from '../Component';
+import { Component } from "../Component"
 
-describe('Core 단위 테스트', () => {
+describe("Core 단위 테스트", () => {
   // modifyPropsOfChildren() : 상위 컴포넌트의 상태가 바뀌면 그 컴포넌트를 구독하고 있는 모든 하위 컴포넌트의 props가 변경된다.
-  test('modifyPropsOfChildren() - 테스트 케이스 1', () => {
+  test("modifyPropsOfChildren() - 테스트 케이스 1", () => {
     const rootComponentState = {
       user: {
-        id: '1abcde',
-        name: 'yong',
+        id: "1abcde",
+        name: "yong",
         age: 30,
         todoCount: 2,
         todos: [
           {
-            id: '1',
-            text: '밥먹기',
+            id: "1",
+            text: "밥먹기",
             isCompleted: true,
           },
           {
-            id: '2',
-            text: '잠자기',
+            id: "2",
+            text: "잠자기",
             isCompleted: false,
           },
         ],
       },
-    };
+    }
 
     class SubSubComponent extends Component {
       template() {
-        return ``;
+        return ``
       }
     }
 
@@ -37,38 +37,38 @@ describe('Core 단위 테스트', () => {
       template() {
         return `
           <div id="SubSubComponent"></div>
-        `;
+        `
       }
 
       setChildren() {
-        this.addComponent(SubSubComponent, '#SubSubComponent', {
+        this.addComponent(SubSubComponent, "#SubSubComponent", {
           todos: this.props.user.todos,
-        });
+        })
       }
     }
 
     class RootComponent extends Component<{}, typeof rootComponentState> {
       initState() {
-        return rootComponentState;
+        return rootComponentState
       }
 
       template() {
         return `
           <div id="SubComponent"></div>
-        `;
+        `
       }
 
       setChildren() {
-        this.addComponent(SubComponent, '#SubComponent', {
+        this.addComponent(SubComponent, "#SubComponent", {
           user: this.state.user,
-        });
+        })
       }
 
       updateUserInfo() {
         this.setState({
           ...this.state,
-          user: { ...this.state.user, name: 'sangyoon' },
-        });
+          user: { ...this.state.user, name: "sangyoon" },
+        })
       }
 
       popTodo() {
@@ -78,83 +78,83 @@ describe('Core 단위 테스트', () => {
             ...this.state.user,
             todos: [
               {
-                id: '1',
-                text: '밥먹기',
+                id: "1",
+                text: "밥먹기",
                 isCompleted: true,
               },
             ],
           },
-        });
+        })
       }
     }
 
     //
 
-    const rootComponent = new RootComponent('#root');
-    const subComponent = rootComponent._children[0];
-    const subsubComponent = subComponent._children[0];
+    const rootComponent = new RootComponent("#root")
+    const subComponent = rootComponent._children[0]
+    const subsubComponent = subComponent._children[0]
 
-    rootComponent.updateUserInfo();
+    rootComponent.updateUserInfo()
     expect(subComponent.props).toEqual({
       user: {
-        id: '1abcde',
-        name: 'sangyoon',
+        id: "1abcde",
+        name: "sangyoon",
         age: 30,
         todoCount: 2,
         todos: [
           {
-            id: '1',
-            text: '밥먹기',
+            id: "1",
+            text: "밥먹기",
             isCompleted: true,
           },
           {
-            id: '2',
-            text: '잠자기',
+            id: "2",
+            text: "잠자기",
             isCompleted: false,
           },
         ],
       },
-    });
+    })
 
-    rootComponent.popTodo();
+    rootComponent.popTodo()
     expect(subComponent.props).toEqual({
       user: {
-        id: '1abcde',
-        name: 'sangyoon',
+        id: "1abcde",
+        name: "sangyoon",
         age: 30,
         todoCount: 2,
         todos: [
           {
-            id: '1',
-            text: '밥먹기',
+            id: "1",
+            text: "밥먹기",
             isCompleted: true,
           },
         ],
       },
-    });
+    })
 
     expect(subsubComponent.props).toEqual({
       todos: [
         {
-          id: '1',
-          text: '밥먹기',
+          id: "1",
+          text: "밥먹기",
           isCompleted: true,
         },
       ],
-    });
+    })
 
     //
-  });
+  })
 
-  test('modifyPropsOfChildren() - 테스트 케이스 2', () => {
+  test("modifyPropsOfChildren() - 테스트 케이스 2", () => {
     const rootComponentState = {
-      name: 'yong',
+      name: "yong",
       info: {
         age: 20,
-        job: 'software-engineer',
+        job: "software-engineer",
         family: {
           count: 5,
-          location: 'Go-Yang',
+          location: "Go-Yang",
           numbers: [1, 2, 3, 4],
           sibling: {
             brothers: 1,
@@ -162,11 +162,11 @@ describe('Core 단위 테스트', () => {
           },
         },
       },
-    };
+    }
 
     class SubSubComponent extends Component {
       template() {
-        return ``;
+        return ``
       }
     }
 
@@ -174,45 +174,45 @@ describe('Core 단위 테스트', () => {
       template() {
         return `
           <div id="SubSubComponent"></div>
-        `;
+        `
       }
 
       setChildren() {
-        this.addComponent(SubSubComponent, '#SubSubComponent', {
+        this.addComponent(SubSubComponent, "#SubSubComponent", {
           location: this.props.info.family.location,
           brothers: this.props.info.family.sibling.brothers,
           sisters: this.props.info.family.sibling.sisters,
-        });
+        })
       }
     }
 
     class RootComponent extends Component<{}, typeof rootComponentState> {
       initState() {
-        return rootComponentState;
+        return rootComponentState
       }
 
       template() {
         return `
           <div id="SubComponent"></div>
-        `;
+        `
       }
 
       setChildren() {
-        this.addComponent(SubComponent, '#SubComponent', {
+        this.addComponent(SubComponent, "#SubComponent", {
           name: this.state.name,
           info: this.state.info,
-        });
+        })
       }
 
       updateUserInfo() {
         this.setState({
           ...this.state,
-          name: 'sangyoon',
+          name: "sangyoon",
           info: {
             ...this.state.info,
             age: 50,
           },
-        });
+        })
       }
 
       updateLocation() {
@@ -222,10 +222,10 @@ describe('Core 단위 테스트', () => {
             ...this.state.info,
             family: {
               ...this.state.info.family,
-              location: 'hello',
+              location: "hello",
             },
           },
-        });
+        })
       }
 
       updateSibling() {
@@ -241,57 +241,57 @@ describe('Core 단위 테스트', () => {
               },
             },
           },
-        });
+        })
       }
     }
 
-    const rootComponent = new RootComponent('#root');
-    const subComponent = rootComponent._children[0];
-    const subsubComponent = subComponent._children[0];
+    const rootComponent = new RootComponent("#root")
+    const subComponent = rootComponent._children[0]
+    const subsubComponent = subComponent._children[0]
 
-    rootComponent.updateUserInfo();
-    expect(subComponent.props.name).toBe('sangyoon');
-    expect(subComponent.props.info.age).toBe(50);
+    rootComponent.updateUserInfo()
+    expect(subComponent.props.name).toBe("sangyoon")
+    expect(subComponent.props.info.age).toBe(50)
 
-    rootComponent.updateLocation();
-    expect(subComponent.props.name).toBe('sangyoon');
-    expect(subComponent.props.info.age).toBe(50);
-    expect(subComponent.props.info.family.location).toBe('hello');
+    rootComponent.updateLocation()
+    expect(subComponent.props.name).toBe("sangyoon")
+    expect(subComponent.props.info.age).toBe(50)
+    expect(subComponent.props.info.family.location).toBe("hello")
 
-    rootComponent.updateSibling();
-    expect(subComponent.props.name).toBe('sangyoon');
-    expect(subComponent.props.info.age).toBe(50);
-    expect(subsubComponent.props.brothers).toBe(1); // 뎁스가 3뎁스라 바뀌지 않음
-    expect(subsubComponent.props.sisters).toBe(1); // 뎁스가 3뎁스라 바뀌지 않음
-  });
+    rootComponent.updateSibling()
+    expect(subComponent.props.name).toBe("sangyoon")
+    expect(subComponent.props.info.age).toBe(50)
+    expect(subsubComponent.props.brothers).toBe(1) // 뎁스가 3뎁스라 바뀌지 않음
+    expect(subsubComponent.props.sisters).toBe(1) // 뎁스가 3뎁스라 바뀌지 않음
+  })
 
   // rerenderChildren() : 상위 컴포넌트의 상태가 바뀌면 그 컴포넌트를 구독하고 있는 모든 하위 컴포넌트는 리렌더링 된다.
-  test('rerenderChildren() - 테스트 케이스 1', () => {
+  test("rerenderChildren() - 테스트 케이스 1", () => {
     const rootComponentState = {
       user: {
-        id: '1abcde',
-        name: 'yong',
+        id: "1abcde",
+        name: "yong",
         age: 30,
         todos: [
           {
-            id: '1',
-            text: '밥먹기',
+            id: "1",
+            text: "밥먹기",
             completed: true,
           },
           {
-            id: '2',
-            text: '잠자기',
+            id: "2",
+            text: "잠자기",
             completed: false,
           },
         ],
       },
-    };
+    }
 
     class SubSubComponent extends Component<{ todos: { id: string; text: string }[] }, {}> {
       template() {
         return `
           ${this.props.todos.map((todo) => `<li data-id="${todo.id}">${todo.text}</li>`)}
-        `;
+        `
       }
     }
 
@@ -301,39 +301,39 @@ describe('Core 단위 테스트', () => {
           <h2>${this.props.user.name}</h2>
           <h3>할 일 : ${this.props.user.todos.length}</h3>
           <div id="SubSubComponent"></div>
-        `;
+        `
       }
 
       setChildren() {
-        this.addComponent(SubSubComponent, '#SubSubComponent', {
+        this.addComponent(SubSubComponent, "#SubSubComponent", {
           todos: this.props.user.todos,
-        });
+        })
       }
     }
 
     class RootComponent extends Component<{}, typeof rootComponentState> {
       initState() {
-        return rootComponentState;
+        return rootComponentState
       }
 
       template() {
         return `
           <h1>this is RootComponent</h1>
           <div id="SubComponent"></div>
-        `;
+        `
       }
 
       setChildren() {
-        this.addComponent(SubComponent, '#SubComponent', {
+        this.addComponent(SubComponent, "#SubComponent", {
           user: this.state.user,
-        });
+        })
       }
 
       updateUserInfo() {
         this.setState({
           ...this.state,
-          user: { ...this.state.user, name: 'sangyoon' },
-        });
+          user: { ...this.state.user, name: "sangyoon" },
+        })
       }
 
       popTodo() {
@@ -343,41 +343,41 @@ describe('Core 단위 테스트', () => {
             ...this.state.user,
             todos: [
               {
-                id: '1',
-                text: '밥먹기',
+                id: "1",
+                text: "밥먹기",
                 completed: true,
               },
             ],
           },
-        });
+        })
       }
     }
 
-    const rootComponent = new RootComponent('#root');
+    const rootComponent = new RootComponent("#root")
 
     // 상태 업데이트 전
-    expect(window.document.querySelector('h2')!.textContent).toBe('yong');
-    expect(window.document.querySelector('h3')!.textContent).toBe('할 일 : 2');
-    expect(window.document.querySelectorAll('li').length).toBe(2);
+    expect(window.document.querySelector("h2")!.textContent).toBe("yong")
+    expect(window.document.querySelector("h3")!.textContent).toBe("할 일 : 2")
+    expect(window.document.querySelectorAll("li").length).toBe(2)
 
     // 상태 업데이트 후
-    rootComponent.updateUserInfo();
-    expect(window.document.querySelector('h2')!.textContent).toBe('sangyoon');
+    rootComponent.updateUserInfo()
+    expect(window.document.querySelector("h2")!.textContent).toBe("sangyoon")
 
-    rootComponent.popTodo();
-    expect(window.document.querySelector('h3')!.textContent).toBe('할 일 : 1');
-    expect(window.document.querySelectorAll('li').length).toBe(1);
-  });
+    rootComponent.popTodo()
+    expect(window.document.querySelector("h3")!.textContent).toBe("할 일 : 1")
+    expect(window.document.querySelectorAll("li").length).toBe(1)
+  })
 
-  test('rerenderChildren() - 테스트 케이스 2', () => {
+  test("rerenderChildren() - 테스트 케이스 2", () => {
     const rootComponentState = {
-      name: 'yong',
+      name: "yong",
       info: {
         age: 20,
-        job: 'software-engineer',
+        job: "software-engineer",
         family: {
           count: 5,
-          location: 'Go-Yang',
+          location: "Go-Yang",
           numbers: [1, 2, 3, 4],
           sibling: {
             brothers: 1,
@@ -385,19 +385,19 @@ describe('Core 단위 테스트', () => {
           },
         },
       },
-    };
+    }
 
     class SubSubComponent extends Component<{
-      location: string;
-      brothers: number;
-      sisters: number;
+      location: string
+      brothers: number
+      sisters: number
     }> {
       template() {
         return `
           <h4>${this.props.location}</h4>
           <h5>형제 : ${this.props.brothers}명</h5>
           <h6>자매 : ${this.props.sisters}명</h6>
-        `;
+        `
       }
     }
 
@@ -407,46 +407,46 @@ describe('Core 단위 테스트', () => {
           <h2>${this.props.name}</h2>
           <h3>나이 : ${this.props.info.age}</h3>
           <div id="SubSubComponent"></div>
-        `;
+        `
       }
 
       setChildren() {
-        this.addComponent(SubSubComponent, '#SubSubComponent', {
+        this.addComponent(SubSubComponent, "#SubSubComponent", {
           location: this.props.info.family.location,
           brothers: this.props.info.family.sibling.brothers,
           sisters: this.props.info.family.sibling.sisters,
-        });
+        })
       }
     }
 
     class RootComponent extends Component<{}, typeof rootComponentState> {
       initState() {
-        return rootComponentState;
+        return rootComponentState
       }
 
       template() {
         return `
           <h1>this is RootComponent</h1>
           <div id="SubComponent"></div>
-        `;
+        `
       }
 
       setChildren() {
-        this.addComponent(SubComponent, '#SubComponent', {
+        this.addComponent(SubComponent, "#SubComponent", {
           name: this.state.name,
           info: this.state.info,
-        });
+        })
       }
 
       updateUserInfo() {
         this.setState({
           ...this.state,
-          name: 'sangyoon',
+          name: "sangyoon",
           info: {
             ...this.state.info,
             age: 50,
           },
-        });
+        })
       }
 
       updateLocation() {
@@ -456,10 +456,10 @@ describe('Core 단위 테스트', () => {
             ...this.state.info,
             family: {
               ...this.state.info.family,
-              location: 'hello',
+              location: "hello",
             },
           },
-        });
+        })
       }
 
       updateSiblingAndLocation() {
@@ -469,151 +469,151 @@ describe('Core 단위 테스트', () => {
             ...this.state.info,
             family: {
               ...this.state.info.family,
-              location: '일산',
+              location: "일산",
               sibling: {
                 brothers: 100,
                 sisters: 101,
               },
             },
           },
-        });
+        })
       }
     }
 
-    const rootComponent = new RootComponent('#root');
+    const rootComponent = new RootComponent("#root")
 
     // 상태 업데이트 전
-    expect(window.document.querySelector('h2')!.textContent).toBe('yong');
-    expect(window.document.querySelector('h4')!.textContent).toBe('Go-Yang');
-    expect(window.document.querySelector('h3')!.textContent).toBe('나이 : 20');
-    expect(window.document.querySelector('h5')!.textContent).toBe('형제 : 1명');
-    expect(window.document.querySelector('h6')!.textContent).toBe('자매 : 1명');
+    expect(window.document.querySelector("h2")!.textContent).toBe("yong")
+    expect(window.document.querySelector("h4")!.textContent).toBe("Go-Yang")
+    expect(window.document.querySelector("h3")!.textContent).toBe("나이 : 20")
+    expect(window.document.querySelector("h5")!.textContent).toBe("형제 : 1명")
+    expect(window.document.querySelector("h6")!.textContent).toBe("자매 : 1명")
 
     // 상태 업데이트 후
-    rootComponent.updateUserInfo();
-    expect(window.document.querySelector('h2')!.textContent).toBe('sangyoon');
-    expect(window.document.querySelector('h3')!.textContent).toBe('나이 : 50');
-    expect(window.document.querySelector('h5')!.textContent).toBe('형제 : 1명');
-    expect(window.document.querySelector('h6')!.textContent).toBe('자매 : 1명');
+    rootComponent.updateUserInfo()
+    expect(window.document.querySelector("h2")!.textContent).toBe("sangyoon")
+    expect(window.document.querySelector("h3")!.textContent).toBe("나이 : 50")
+    expect(window.document.querySelector("h5")!.textContent).toBe("형제 : 1명")
+    expect(window.document.querySelector("h6")!.textContent).toBe("자매 : 1명")
 
-    rootComponent.updateLocation();
-    expect(window.document.querySelector('h2')!.textContent).toBe('sangyoon');
-    expect(window.document.querySelector('h3')!.textContent).toBe('나이 : 50');
-    expect(window.document.querySelector('h4')!.textContent).toBe('hello');
-    expect(window.document.querySelector('h5')!.textContent).toBe('형제 : 1명');
-    expect(window.document.querySelector('h6')!.textContent).toBe('자매 : 1명');
+    rootComponent.updateLocation()
+    expect(window.document.querySelector("h2")!.textContent).toBe("sangyoon")
+    expect(window.document.querySelector("h3")!.textContent).toBe("나이 : 50")
+    expect(window.document.querySelector("h4")!.textContent).toBe("hello")
+    expect(window.document.querySelector("h5")!.textContent).toBe("형제 : 1명")
+    expect(window.document.querySelector("h6")!.textContent).toBe("자매 : 1명")
 
-    rootComponent.updateSiblingAndLocation();
-    expect(window.document.querySelector('h2')!.textContent).toBe('sangyoon');
-    expect(window.document.querySelector('h3')!.textContent).toBe('나이 : 50');
-    expect(window.document.querySelector('h4')!.textContent).toBe('일산');
-    expect(window.document.querySelector('h5')!.textContent).toBe('형제 : 1명'); // 뎁스가 3뎁스라 바뀌지 않음
-    expect(window.document.querySelector('h6')!.textContent).toBe('자매 : 1명'); // 뎁스가 3뎁스라 바뀌지 않음
-  });
+    rootComponent.updateSiblingAndLocation()
+    expect(window.document.querySelector("h2")!.textContent).toBe("sangyoon")
+    expect(window.document.querySelector("h3")!.textContent).toBe("나이 : 50")
+    expect(window.document.querySelector("h4")!.textContent).toBe("일산")
+    expect(window.document.querySelector("h5")!.textContent).toBe("형제 : 1명") // 뎁스가 3뎁스라 바뀌지 않음
+    expect(window.document.querySelector("h6")!.textContent).toBe("자매 : 1명") // 뎁스가 3뎁스라 바뀌지 않음
+  })
 
-  test('rerenderChildren() - 렌더링과 리렌더링은 레벨순회로 수행된다.', () => {
+  test("rerenderChildren() - 렌더링과 리렌더링은 레벨순회로 수행된다.", () => {
     const rootComponentState = {
-      header: 'header',
+      header: "header",
       numbers: [1, 2, 3, 4, 5],
-      footer: 'footer',
-    };
+      footer: "footer",
+    }
 
-    let result: any = [];
-    const expected = ['Root', 'Header', 'Main', 'NumberCounter', 'Numbers', 'Footer'];
+    let result: any = []
+    const expected = ["Root", "Header", "Main", "NumberCounter", "Numbers", "Footer"]
 
     class FooterComponent extends Component {
       template() {
-        result.push('Footer');
-        return ``;
+        result.push("Footer")
+        return ``
       }
     }
 
     class NumberCounterComponent extends Component {
       template() {
-        result.push('NumberCounter');
-        return ``;
+        result.push("NumberCounter")
+        return ``
       }
     }
 
     class Numbers extends Component {
       template() {
-        result.push('Numbers');
-        return ``;
+        result.push("Numbers")
+        return ``
       }
     }
 
     class MainComponent extends Component<{ numbers: number[] }> {
       template() {
-        result.push('Main');
+        result.push("Main")
         return `
           <div id="NumberCounterComponent"></div>
           <div id="NumbersComponent"></div>
-        `;
+        `
       }
 
       setChildren() {
-        this.addComponent(NumberCounterComponent, '#NumberCounterComponent', {
+        this.addComponent(NumberCounterComponent, "#NumberCounterComponent", {
           numbers: this.props.numbers,
-        });
+        })
 
-        this.addComponent(Numbers, '#NumbersComponent', {
+        this.addComponent(Numbers, "#NumbersComponent", {
           numbers: this.props.numbers,
-        });
+        })
       }
     }
 
     class HeaderComponent extends Component {
       template() {
-        result.push('Header');
-        return ``;
+        result.push("Header")
+        return ``
       }
     }
 
     class RootComponent extends Component<{}, typeof rootComponentState> {
       initState() {
-        return rootComponentState;
+        return rootComponentState
       }
 
       template() {
-        result.push('Root');
+        result.push("Root")
         return `
           <div id="HeaderComponent"></div>
           <div id="MainComponent"></div>
           <div id="FooterComponent"></div>
-        `;
+        `
       }
 
       setChildren() {
-        this.addComponent(HeaderComponent, '#HeaderComponent', {
+        this.addComponent(HeaderComponent, "#HeaderComponent", {
           header: this.state.header,
-        });
+        })
 
-        this.addComponent(MainComponent, '#MainComponent', {
+        this.addComponent(MainComponent, "#MainComponent", {
           numbers: this.state.numbers,
-        });
+        })
 
-        this.addComponent(FooterComponent, '#FooterComponent', {
+        this.addComponent(FooterComponent, "#FooterComponent", {
           footer: this.state.footer,
-        });
+        })
       }
 
       updateState() {
         this.setState({
-          header: 'updatedHeader',
+          header: "updatedHeader",
           numbers: [11, 12, 13, 14, 15],
-          footer: 'updatedFooter',
-        });
+          footer: "updatedFooter",
+        })
       }
     }
 
-    const rootComponent = new RootComponent('#root');
+    const rootComponent = new RootComponent("#root")
 
     // 초기 렌더링 결과 확인
-    expect(result).toEqual(expected);
+    expect(result).toEqual(expected)
 
     // 모든 상태가 업데이트된 후
-    result = [];
-    rootComponent.updateState();
-    expect(result).toEqual(expected);
-  });
-});
+    result = []
+    rootComponent.updateState()
+    expect(result).toEqual(expected)
+  })
+})

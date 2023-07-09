@@ -1,4 +1,4 @@
-import { isMatch, getParams } from "./helpers"
+import { isMatch, getParams } from "./utils"
 
 // [realPath, configPath, expected]
 const testForIsMatch: [string, string, boolean][] = [

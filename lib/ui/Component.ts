@@ -1,10 +1,9 @@
-import { callComponentDidUpdateOfChildren, modifyPropsOfChildren, rerenderChildren } from './notifies'
-import { isDiff } from './helpers'
+import { ClassType, DOMReferenceError, PrototypeError, ProviderImpl } from "../common-interfaces"
+import { callComponentDidUpdateOfChildren, modifyPropsOfChildren, rerenderChildren } from "./notifies"
+import { isDiff } from "./utils"
 
-import { Impl, Errors, Type } from '../interfaces'
-
-export default abstract class Component<Props = {}, State = {}> {
-  private provider: Impl.ProviderImpl | null = null
+export abstract class Component<Props = {}, State = {}> {
+  private provider: ProviderImpl | null = null
   private providerHandler: (() => void) | null = null
 
   private containerId: string
@@ -51,10 +50,10 @@ export default abstract class Component<Props = {}, State = {}> {
 
   setChildren() {}
 
-  addComponent<T>(ComponentClass: Type.ClassType<Component<T, any>>, containerId: string, props: T = {} as T) {
+  addComponent<T>(ComponentClass: ClassType<Component<T, any>>, containerId: string, props: T = {} as T) {
     if (Object.getPrototypeOf(ComponentClass) !== Component) {
-      throw new Errors.PrototypeError(
-        '첫 번째 매개변수는 반드시 Component 클래스의 프로토타입이어야 합니다. Component 클래스를 상속한 클래스를 첫 번째 매개변수로 사용하세요.',
+      throw new PrototypeError(
+        "첫 번째 매개변수는 반드시 Component 클래스의 프로토타입이어야 합니다. Component 클래스를 상속한 클래스를 첫 번째 매개변수로 사용하세요.",
       )
     }
     const componentInstance = new ComponentClass(containerId, props)
@@ -94,7 +93,7 @@ export default abstract class Component<Props = {}, State = {}> {
   get $container() {
     const $el = window.document.querySelector(this.containerId)
     if (!$el) {
-      throw new Errors.DOMReferenceError(`${this.containerId}에 해당하는 DOMElement를 찾지 못했어요.`)
+      throw new DOMReferenceError(`${this.containerId}에 해당하는 DOMElement를 찾지 못했어요.`)
     }
     return $el
   }
@@ -125,7 +124,7 @@ export default abstract class Component<Props = {}, State = {}> {
     this.setEvent()
   }
 
-  setProvider(provider: Impl.ProviderImpl) {
+  setProvider(provider: ProviderImpl) {
     this.provider = provider
     this.providerHandler = () => this.notify()
     this.provider.subscribe(this.providerHandler)

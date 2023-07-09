@@ -1,7 +1,8 @@
+import { PrototypeError } from "../common-interfaces"
+import { Component } from "../ui/Component"
+
 const parseUrlPath = (configPath: string) => {
-  return new RegExp(
-    "^" + configPath.replace(/\//g, "\\/").replace(/:\w+/g, "[\\w]+") + "\\/?$",
-  )
+  return new RegExp("^" + configPath.replace(/\//g, "\\/").replace(/:\w+/g, "[\\w]+") + "\\/?$")
 }
 
 export const isMatch = (configPath: string, realPath: string) => {
@@ -15,10 +16,7 @@ export const getParams = (configPath: string, realPath: string) => {
   const realPaths = realPath.split("/")
   const n = configPaths.length
 
-  if (
-    !isMatch(configPath, realPath) ||
-    configPaths.length !== realPaths.length
-  ) {
+  if (!isMatch(configPath, realPath) || configPaths.length !== realPaths.length) {
     throw new Error("invalid usecase.")
   }
 
@@ -31,4 +29,14 @@ export const getParams = (configPath: string, realPath: string) => {
   }
 
   return result
+}
+
+const isComponentClass = (arg: any) => {
+  return Object.getPrototypeOf(arg) === Component
+}
+
+export const validateArgIsComponent = (arg: any) => {
+  if (!isComponentClass(arg)) {
+    throw new PrototypeError("두 번째 매개변수는 반드시 Component 클래스여야 합니다.")
+  }
 }
