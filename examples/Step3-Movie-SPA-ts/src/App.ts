@@ -1,4 +1,4 @@
-import { router as Router } from "sangyoon-ui"
+import { Router } from "sangyoon-ui"
 
 import MainPage from "./pages/MainPage"
 import MoviePage from "./pages/MoviePage"

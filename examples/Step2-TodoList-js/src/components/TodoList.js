@@ -1,8 +1,8 @@
-import { ui } from "sangyoon-ui"
+import { Ui } from "sangyoon-ui"
 
 import TodoItem from "./TodoItem.js"
 
-export default class TodoList extends ui.Component {
+export default class TodoList extends Ui.Component {
   template() {
     if (this.props.todos.length === 0) {
       return `
@@ -18,12 +18,8 @@ export default class TodoList extends ui.Component {
   }
 
   setEvent() {
-    this.addEvent("click", ".todo-text", (e) =>
-      this.actionStrategy(e, "toggle"),
-    )
-    this.addEvent("click", ".todo-deleteBtn", (e) =>
-      this.actionStrategy(e, "delete"),
-    )
+    this.addEvent("click", ".todo-text", (e) => this.actionStrategy(e, "toggle"))
+    this.addEvent("click", ".todo-deleteBtn", (e) => this.actionStrategy(e, "delete"))
   }
 
   actionStrategy(e, actionType) {

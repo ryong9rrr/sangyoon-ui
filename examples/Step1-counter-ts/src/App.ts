@@ -1,10 +1,10 @@
-import { ui } from "sangyoon-ui"
+import { Ui } from "sangyoon-ui"
 
 interface AppState {
   count: number
 }
 
-export default class App extends ui.Component<{}, AppState> {
+export default class App extends Ui.Component<{}, AppState> {
   initState() {
     return {
       count: 0,

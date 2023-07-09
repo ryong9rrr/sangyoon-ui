@@ -1,10 +1,10 @@
-import { ui } from "sangyoon-ui"
+import { Ui } from "sangyoon-ui"
 
 interface TodoFromProps {
   addTodo: (text: string) => void
 }
 
-export default class TodoForm extends ui.Component<TodoFromProps> {
+export default class TodoForm extends Ui.Component<TodoFromProps> {
   template() {
     return `
       <form>

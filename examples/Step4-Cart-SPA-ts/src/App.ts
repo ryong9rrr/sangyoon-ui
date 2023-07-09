@@ -1,7 +1,7 @@
-import { ui } from "sangyoon-ui"
+import { Ui } from "sangyoon-ui"
 import Header from "./components/Header"
 
-export default class App extends ui.Component {
+export default class App extends Ui.Component {
   template() {
     return `
       <div id="HeaderComponent"></div>

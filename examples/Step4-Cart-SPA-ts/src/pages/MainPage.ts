@@ -1,4 +1,4 @@
-import { ui, router as Router } from "sangyoon-ui"
+import { Ui, Router } from "sangyoon-ui"
 import Item from "../models/Item"
 import { fetchItems } from "../mock/handlers"
 import { cartStore } from "../cart-store"
@@ -9,7 +9,7 @@ interface MainPageState {
   items: Item[]
 }
 
-export default class MainPage extends ui.Component<{}, MainPageState> {
+export default class MainPage extends Ui.Component<{}, MainPageState> {
   initState() {
     return {
       loading: true,
@@ -33,9 +33,7 @@ export default class MainPage extends ui.Component<{}, MainPageState> {
             <img class="item-image" src="${item.image}" />
             ${item.name}
             <button class="like-button">${
-              likeItems.find((likeItem) => likeItem.id === item.id)
-                ? "unlike"
-                : "like"
+              likeItems.find((likeItem) => likeItem.id === item.id) ? "unlike" : "like"
             }</button>
           </li>
         `,

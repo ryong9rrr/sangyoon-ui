@@ -1,4 +1,4 @@
-import { ui } from "sangyoon-ui"
+import { Ui } from "sangyoon-ui"
 import { cartStore } from "../cart-store"
 import * as Actions from "../cart-store/actions"
 
@@ -7,7 +7,7 @@ interface ModalProps {
   closeModal: () => void
 }
 
-export default class Modal extends ui.Component<ModalProps> {
+export default class Modal extends Ui.Component<ModalProps> {
   template() {
     if (!this.props.modalVisible) {
       return ``
@@ -56,9 +56,7 @@ export default class Modal extends ui.Component<ModalProps> {
       }
       const $li = (e.target as HTMLButtonElement).closest("li") as HTMLLIElement
       const itemId = $li.id
-      const targetItem = cartStore
-        .getState()
-        .likeItems.find((item) => item.id === itemId)
+      const targetItem = cartStore.getState().likeItems.find((item) => item.id === itemId)
       if (targetItem) {
         cartStore.dispatch(Actions.toggleLikeItem(targetItem))
       }

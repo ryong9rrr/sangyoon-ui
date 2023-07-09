@@ -1,6 +1,6 @@
-import { ui } from "sangyoon-ui"
+import { Ui } from "sangyoon-ui"
 
-export default class App extends ui.Component {
+export default class App extends Ui.Component {
   initState() {
     return {
       count: 0,

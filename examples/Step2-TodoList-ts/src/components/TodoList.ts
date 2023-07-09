@@ -1,4 +1,4 @@
-import { ui } from "sangyoon-ui"
+import { Ui } from "sangyoon-ui"
 
 import TodoItem from "./TodoItem"
 import TodoModel from "../models/Todo"
@@ -14,7 +14,7 @@ const ACTION_TYPE = {
   DELETE: "DELETE",
 } as const
 
-export default class TodoList extends ui.Component<TodoListProps> {
+export default class TodoList extends Ui.Component<TodoListProps> {
   template() {
     if (this.props.todos.length === 0) {
       return `
@@ -30,12 +30,8 @@ export default class TodoList extends ui.Component<TodoListProps> {
   }
 
   setEvent() {
-    this.addEvent("click", ".todo-text", (e) =>
-      this.actionStrategy(e, ACTION_TYPE.TOGGLE),
-    )
-    this.addEvent("click", ".todo-deleteBtn", (e) =>
-      this.actionStrategy(e, ACTION_TYPE.DELETE),
-    )
+    this.addEvent("click", ".todo-text", (e) => this.actionStrategy(e, ACTION_TYPE.TOGGLE))
+    this.addEvent("click", ".todo-deleteBtn", (e) => this.actionStrategy(e, ACTION_TYPE.DELETE))
   }
 
   actionStrategy(e: Event, actionType: keyof typeof ACTION_TYPE) {

@@ -1,6 +1,6 @@
-import { ui } from "sangyoon-ui"
+import { Ui } from "sangyoon-ui"
 
-export default class TodoForm extends ui.Component {
+export default class TodoForm extends Ui.Component {
   template() {
     return `
       <form>

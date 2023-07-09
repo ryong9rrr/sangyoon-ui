@@ -1,4 +1,4 @@
-import { ui } from "sangyoon-ui"
+import { Ui } from "sangyoon-ui"
 import Item from "../models/Item"
 import { fetchItem } from "../mock/handlers"
 import { cartStore } from "../cart-store"
@@ -10,7 +10,7 @@ interface ItemPageState {
   item: Item | null
 }
 
-export default class ItemPage extends ui.Component<{}, ItemPageState> {
+export default class ItemPage extends Ui.Component<{}, ItemPageState> {
   initState() {
     return {
       loading: true,
@@ -35,9 +35,7 @@ export default class ItemPage extends ui.Component<{}, ItemPageState> {
         <img src="${this.state.item.image}" />
             ${this.state.item.name}
             <button class="like-button">${
-              likeItems.find((likeItem) => likeItem.id === this.state.item?.id)
-                ? "unlike"
-                : "like"
+              likeItems.find((likeItem) => likeItem.id === this.state.item?.id) ? "unlike" : "like"
             }</button>
       </div>
     `

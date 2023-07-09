@@ -1,4 +1,4 @@
-import { ui } from "sangyoon-ui"
+import { Ui } from "sangyoon-ui"
 
 import TodoForm from "./components/TodoForm"
 import TodoList from "./components/TodoList"
@@ -8,7 +8,7 @@ interface AppState {
   todos: TodoModel[]
 }
 
-export default class App extends ui.Component<{}, AppState> {
+export default class App extends Ui.Component<{}, AppState> {
   initState() {
     return {
       todos: [],
@@ -55,9 +55,7 @@ export default class App extends ui.Component<{}, AppState> {
   }
 
   deleteTodo(todoId: string) {
-    const nextTodos = this.state.todos.filter(
-      ({ ...todo }) => todo.id !== todoId,
-    )
+    const nextTodos = this.state.todos.filter(({ ...todo }) => todo.id !== todoId)
     this.setState({ todos: nextTodos })
   }
 }

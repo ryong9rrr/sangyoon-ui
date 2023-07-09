@@ -1,4 +1,4 @@
-import { ui, router as Router } from "sangyoon-ui"
+import { Ui, Router } from "sangyoon-ui"
 
 import Movie from "../models/Movie"
 import { fetchMovies } from "../mock/handlers"
@@ -8,7 +8,7 @@ interface MainPageState {
   movies: Movie[]
 }
 
-export default class MainPage extends ui.Component<{}, MainPageState> {
+export default class MainPage extends Ui.Component<{}, MainPageState> {
   initState() {
     return {
       loading: true,

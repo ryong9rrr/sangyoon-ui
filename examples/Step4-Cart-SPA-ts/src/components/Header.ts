@@ -1,4 +1,4 @@
-import { ui, router as Router } from "sangyoon-ui"
+import { Ui, Router } from "sangyoon-ui"
 import Modal from "./Modal"
 import { cartStore } from "../cart-store"
 
@@ -6,7 +6,7 @@ interface HeaderState {
   modalVisible: boolean
 }
 
-export default class Header extends ui.Component<{}, HeaderState> {
+export default class Header extends Ui.Component<{}, HeaderState> {
   initState() {
     return {
       modalVisible: false,

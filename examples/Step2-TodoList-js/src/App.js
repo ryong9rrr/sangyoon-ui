@@ -1,10 +1,10 @@
-import { ui } from "sangyoon-ui"
+import { Ui } from "sangyoon-ui"
 
 import TodoForm from "./components/TodoForm.js"
 import TodoList from "./components/TodoList.js"
 import TodoModel from "./models/Todo.js"
 
-export default class App extends ui.Component {
+export default class App extends Ui.Component {
   initState() {
     return {
       todos: [],
@@ -51,9 +51,7 @@ export default class App extends ui.Component {
   }
 
   deleteTodo(todoId) {
-    const nextTodos = this.state.todos.filter(
-      ({ ...todo }) => todo.id !== todoId,
-    )
+    const nextTodos = this.state.todos.filter(({ ...todo }) => todo.id !== todoId)
     this.setState({ todos: nextTodos })
   }
 }

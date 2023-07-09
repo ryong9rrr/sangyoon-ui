@@ -1,4 +1,4 @@
-import { ui } from "sangyoon-ui"
+import { Ui } from "sangyoon-ui"
 import Movie from "../models/Movie"
 import { fetchMovie } from "../mock/handlers"
 
@@ -8,7 +8,7 @@ interface MoviePageState {
   movie: Movie | null
 }
 
-export default class MoviePage extends ui.Component<{}, MoviePageState> {
+export default class MoviePage extends Ui.Component<{}, MoviePageState> {
   initState() {
     return {
       loading: true,
