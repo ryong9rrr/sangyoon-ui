@@ -1,38 +1,35 @@
-import { Component } from "../../ui"
-import { Service, Type } from "../../interfaces"
+import { Component } from '../../ui'
+import { Type } from '../../interfaces'
 
-import { ROUTE_EVENT_TYPE } from "./event-type"
-import { RouteTable } from "./types"
-import { isMatch } from "./helpers"
-import { validateArgIsComponent } from "./validate"
+import { ROUTE_EVENT_TYPE } from './event-type'
+import { RouteTable } from './types'
+import { isMatch } from './helpers'
+import { validateArgIsComponent } from './validate'
 
 export default class Router {
   private static instance: Router
-  static getInstance(rootId: string, _webApiService: Service.WebApiService) {
+  static getInstance(rootId: string) {
     if (Router.instance) {
       return this.instance
     }
-    this.instance = new Router(rootId, _webApiService)
+    this.instance = new Router(rootId)
     return this.instance
   }
 
   private currentView: Component | null = null
   private rootId: string
-  private webApiService: Service.WebApiService
   private routeTable: RouteTable = []
   private notFoundViewClass: Type.ClassType<Component> | null = null
 
-  private constructor(rootId: string, _webApiInterface: Service.WebApiService) {
-    this.webApiService = _webApiInterface
-
+  private constructor(rootId: string) {
     this.rootId = rootId
 
-    this.webApiService.addEventListener("popstate", this.route.bind(this))
-    this.webApiService.addEventListener(ROUTE_EVENT_TYPE, (e) => {
-      const prevPath = this.webApiService.location.pathname
+    window.addEventListener('popstate', this.route.bind(this))
+    window.addEventListener(ROUTE_EVENT_TYPE, (e) => {
+      const prevPath = window.location.pathname
       const { path } = (e as CustomEvent<{ path: string }>).detail
       if (prevPath !== path) {
-        this.webApiService.history.pushState(null, "", path)
+        window.history.pushState(null, '', path)
         this.route()
       }
     })
@@ -62,11 +59,11 @@ export default class Router {
     }
 
     this.setCurrentView(null)
-    this.webApiService.document.querySelector(this.rootId)!.innerHTML = ``
+    window.document.querySelector(this.rootId)!.innerHTML = ``
   }
 
   private getRealPathname() {
-    return this.webApiService.location.pathname
+    return window.location.pathname
   }
 
   private setCurrentView = (view: Component | null) => {

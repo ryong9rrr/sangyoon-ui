@@ -1,14 +1,8 @@
-import { ROUTE_EVENT_TYPE } from "./lib/event-type"
-import { RouterStaticMethodOptions } from "./lib/types"
+import { ROUTE_EVENT_TYPE } from './lib/event-type'
 
-export default function navigate(
-  path: string,
-  options: RouterStaticMethodOptions = {
-    _webApiService: window,
-  },
-) {
-  if (options._webApiService.location.pathname !== path) {
-    options._webApiService.dispatchEvent(
+export default function navigate(path: string) {
+  if (window.location.pathname !== path) {
+    window.dispatchEvent(
       new CustomEvent(ROUTE_EVENT_TYPE, {
         detail: {
           path,

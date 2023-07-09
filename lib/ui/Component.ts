@@ -1,15 +1,9 @@
-import {
-  callComponentDidUpdateOfChildren,
-  modifyPropsOfChildren,
-  rerenderChildren,
-} from "./notifies"
-import { isDiff } from "./helpers"
+import { callComponentDidUpdateOfChildren, modifyPropsOfChildren, rerenderChildren } from './notifies'
+import { isDiff } from './helpers'
 
-import { Impl, Errors, Service, Type } from "../interfaces"
+import { Impl, Errors, Type } from '../interfaces'
 
 export default abstract class Component<Props = {}, State = {}> {
-  private webApiService: Service.WebApiService
-
   private provider: Impl.ProviderImpl | null = null
   private providerHandler: (() => void) | null = null
 
@@ -23,13 +17,7 @@ export default abstract class Component<Props = {}, State = {}> {
 
   _children: Component<any, any>[] = []
 
-  constructor(
-    containerId: string,
-    props: Props = {} as Props,
-    _webApiService: Service.WebApiService = window,
-  ) {
-    this.webApiService = _webApiService
-
+  constructor(containerId: string, props: Props = {} as Props) {
     this.containerId = containerId
     this._prevState = this._state = this.initState()
     this._prevProps = this._props = props
@@ -63,39 +51,23 @@ export default abstract class Component<Props = {}, State = {}> {
 
   setChildren() {}
 
-  addComponent<T>(
-    ComponentClass: Type.ClassType<Component<T, any>>,
-    containerId: string,
-    props: T = {} as T,
-    webApiService: Service.WebApiService = window,
-  ) {
+  addComponent<T>(ComponentClass: Type.ClassType<Component<T, any>>, containerId: string, props: T = {} as T) {
     if (Object.getPrototypeOf(ComponentClass) !== Component) {
       throw new Errors.PrototypeError(
-        "첫 번째 매개변수는 반드시 Component 클래스의 프로토타입이어야 합니다. Component 클래스를 상속한 클래스를 첫 번째 매개변수로 사용하세요.",
+        '첫 번째 매개변수는 반드시 Component 클래스의 프로토타입이어야 합니다. Component 클래스를 상속한 클래스를 첫 번째 매개변수로 사용하세요.',
       )
     }
-    const componentInstance = new ComponentClass(
-      containerId,
-      props,
-      webApiService,
-    )
+    const componentInstance = new ComponentClass(containerId, props)
     this._children.push(componentInstance)
     return componentInstance
   }
 
   setEvent() {}
 
-  addEvent<K extends keyof HTMLElementEventMap>(
-    eventType: K,
-    selector: string,
-    listener: (e: Event) => void,
-  ) {
-    const children = Array.from(
-      this.$container.querySelectorAll(selector),
-    ) as HTMLElement[]
-    const isTarget = (target: HTMLElement) =>
-      children.includes(target) || target.closest(selector)
-    this.$container.addEventListener(eventType, (e) => {
+  addEvent<K extends keyof HTMLElementEventMap>(eventType: K, selector: string, listener: (e: Event) => void) {
+    const children = Array.from(this.$container.querySelectorAll(selector)) as HTMLElement[]
+    const isTarget = (target: HTMLElement) => children.includes(target) || target.closest(selector)
+    this.$container.addEventListener(eventType, (e: Event) => {
       if (e.target && isTarget(e.target as HTMLElement)) {
         listener(e)
       }
@@ -120,11 +92,9 @@ export default abstract class Component<Props = {}, State = {}> {
   }
 
   get $container() {
-    const $el = this.webApiService.document.querySelector(this.containerId)
+    const $el = window.document.querySelector(this.containerId)
     if (!$el) {
-      throw new Errors.DOMReferenceError(
-        `${this.containerId}에 해당하는 DOMElement를 찾지 못했어요.`,
-      )
+      throw new Errors.DOMReferenceError(`${this.containerId}에 해당하는 DOMElement를 찾지 못했어요.`)
     }
     return $el
   }
